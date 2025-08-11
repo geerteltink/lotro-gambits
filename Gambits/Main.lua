@@ -3,25 +3,21 @@
 -- GetItem(i) - gets the ith item
 -- event: SkillAdded(object, args) - args.Index (index), args.Skill (skill object)
 -- event: SkillRemoved(object, args) - args.Index (index), args.Skill (skill object)
-
 -- Turbine.Gameplay.SkillInfo
 -- GetName() - gets the name
 -- GetDescription() - gets part of the tooltip
 -- GetType() - one of Turbine.Gameplay.SkilType (Normal, Mount, Gambit)
 -- GetIconImageID() - presumably the image ID of the skill
-
 -- Turbine.Gameplay.SkillList.GetItem(x) returns a
 -- Turbine.Gameplay.ActiveSkill(GetTrainedSkills)
 -- Turbine.Gameplay.Gambit(GetTrainedGambits)
 -- Turbine.Gameplay.Skill(GetUntrainedSkills and GetUntrainedGambits).
 -- Oddly enough GetUntrainedGambits returns a Turbine.Gameplay.Skill instead of a Turbine.Gameplay.Gambit.
-
 -- Turbine.Gameplay.LocalPlayer:GetInstance():GetTrainedSkills()
 -- Turbine.Gameplay.LocalPlayer:GetInstance():GetUntrainedSkills()
 -- Turbine.Gameplay.LocalPlayer:GetInstance():GetClassAttributes():GetTrainedGambits()
 -- Turbine.Gameplay.LocalPlayer:GetInstance():GetClassAttributes():GetUntrainedGambits()
 -- return a Turbine.Gameplay.SkillList object. (The last two only work for Wardens, of course.)
-
 -- Turbine imports..
 import "Turbine";
 import "Turbine.Gameplay";
@@ -48,7 +44,7 @@ Debug("Loading plugin " .. plugin:GetName() .. "...");
 -- Load the plugin settings
 Settings.Load();
 
---Settings.GetAllSkills();
+-- Settings.GetAllSkills();
 
 ActiveGambits = {};
 GambitWindows = {};
@@ -82,7 +78,16 @@ function ConstructWindows()
     local skillCount = skills:GetCount();
     for i = 1, skillCount, 1 do
         local skill = Turbine.Gameplay.Skill.GetSkillInfo(skills:GetItem(i));
+        Debug("Gambit detected: " .. skill:GetName() .. " (" .. skill:GetIconImageID() .. ")" .. " - " ..
+                  skill:GetGambitCount());
         ActiveGambits[skill:GetIconImageID()] = skill:GetName();
+    end
+
+    local xskills = player:GetClassAttributes():GetUntrainedGambits();
+    local xskillCount = xskills:GetCount();
+    for i = 1, xskillCount, 1 do
+        local xskill = Turbine.Gameplay.Skill.GetSkillInfo(xskills:GetItem(i));
+        Debug("Untrained Gambit detected: " .. xskill:GetName() .. " (" .. xskill:GetIconImageID() .. ")");
     end
 
     -- Create gambit windows
@@ -142,7 +147,7 @@ function DetectStance()
         currentStance = newStance;
         Debug("Warden stance changed to " .. currentStance .. ".");
     end
---[[
+    --[[
     -- Go through all stances
     for k,v in pairs(Turbine.Gameplay.Attributes.WardenStance) do
         if (v == stance) then
@@ -150,7 +155,7 @@ function DetectStance()
             Debug("Warden stance changed to " .. k .. ".");
         end
     end
-]]--
+]] --
 end
 
 -- Register callback function for new added skills
@@ -177,14 +182,14 @@ Turbine.Gameplay.ClassAttributes.StanceChanged = function(sender, args)
 end
 
 -- Register callback function for mount changes
-player.MountChanged = function (sender, args)
+player.MountChanged = function(sender, args)
     Core.DetectMount();
 end
 
 -- Plugin unload handler
 Turbine.Plugin.Unload = function(sender, args)
     -- Save the data when the plugin unloads.
-    --saveData();
+    -- saveData();
 
     Debug("Plugin " .. Settings.GetPluginName() .. " unloading...");
 end

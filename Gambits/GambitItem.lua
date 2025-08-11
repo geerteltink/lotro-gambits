@@ -3,26 +3,8 @@ import "Turbine.UI.Lotro";
 
 GambitItem = class(Turbine.UI.Control);
 
-GambitItem.EffectsOrder = {
-    "Targets",
-    "Range",
-    "Dmg",
-    "DoT",
-    "Threat",
-    "ToT",
-    "Transfer",
-    "Heal",
-    "HoT",
-    "Interrupt",
-    "Finisher",
-    "Daze",
-    "Fear",
-    "Knockout",
-    "Root",
-    "Defence",
-    "Special",
-    "Other"
-}
+GambitItem.EffectsOrder = {"Targets", "Range", "Dmg", "DoT", "Threat", "ToT", "Transfer", "Heal", "HoT", "Interrupt",
+                           "Finisher", "Daze", "Fear", "Knockout", "Root", "Defence", "Special", "Other"}
 
 function GambitItem:Constructor(gambitID)
     Turbine.UI.Control.Constructor(self);
@@ -68,13 +50,19 @@ function GambitItem:Constructor(gambitID)
         local effectsArray = nil;
         local effectsArray = {};
         if gambit.Default ~= nil then
-            for k,v in pairs(gambit.Default) do effectsArray[k] = v end
+            for k, v in pairs(gambit.Default) do
+                effectsArray[k] = v
+            end
         end
 
         if currentStance == "Determination" and gambit.Determination ~= nil then
-            for k,v in pairs(gambit.Determination) do effectsArray[k] = v end
+            for k, v in pairs(gambit.Determination) do
+                effectsArray[k] = v
+            end
         elseif currentStance == "Assailment" and gambit.Assailment ~= nil then
-            for k,v in pairs(gambit.Assailment) do effectsArray[k] = v end
+            for k, v in pairs(gambit.Assailment) do
+                effectsArray[k] = v
+            end
         end
 
         self:SetEffectsLabel(effectsArray);
@@ -89,7 +77,7 @@ function GambitItem:SetEffectsLabel(gambit)
         return;
     end
 
-    for k,v in pairs(GambitItem.EffectsOrder) do
+    for k, v in pairs(GambitItem.EffectsOrder) do
         local effect = tostring(v);
 
         -- Process effect
@@ -100,7 +88,7 @@ function GambitItem:SetEffectsLabel(gambit)
                 self.effects:AppendText(",");
             end
 
-            count = count +1;
+            count = count + 1;
 
             -- Damage
             if effect == "Dmg" then
@@ -108,23 +96,23 @@ function GambitItem:SetEffectsLabel(gambit)
             elseif effect == "DoT" then
                 self.effects:AppendText("<rgb=#FF4444>DoT</rgb>");
 
-            -- Threat
+                -- Threat
             elseif effect == "Threat" then
                 self.effects:AppendText("<rgb=#FFBB33>" .. gambit[effect] .. "</rgb>");
             elseif effect == "ToT" or effect == "Transfer" then
                 self.effects:AppendText("<rgb=#FFBB33>" .. gambit[effect] .. "</rgb>");
 
-            -- Healing
-            elseif effect == "Heal"  then
+                -- Healing
+            elseif effect == "Heal" then
                 self.effects:AppendText("<rgb=#99CC00>" .. effect .. "</rgb>");
             elseif effect == "HoT" then
                 self.effects:AppendText("<rgb=#99CC00>" .. effect .. "</rgb>");
 
-            -- Defence
+                -- Defence
             elseif effect == "Defence" then
                 self.effects:AppendText("<rgb=#33B5E5>" .. gambit[effect] .. "</rgb>");
 
-            -- Specials
+                -- Specials
             elseif effect == "Interrupt" then
                 self.effects:AppendText("<rgb=#AA66CC>Interr.</rgb>");
             elseif effect == "Finisher" then
@@ -140,7 +128,7 @@ function GambitItem:SetEffectsLabel(gambit)
             elseif effect == "Range" then
                 self.effects:AppendText("<rgb=#FF8800>R</rgb>");
 
-            -- Other effects
+                -- Other effects
             elseif effect == "Other" then
                 self.effects:AppendText(gambit[effect]);
             else

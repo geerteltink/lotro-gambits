@@ -11,7 +11,7 @@ function GambitList:Constructor(gambits)
     self:SetMouseVisible(false);
 
     -- Add gambits
-    for k,v in pairs(gambits) do
+    for k, v in pairs(gambits) do
         if (ActiveGambits[v]) then
             local gambit = GambitItem(v);
             self:AddItem(gambit);
