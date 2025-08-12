@@ -3,8 +3,8 @@ import "Turbine.UI.Lotro";
 
 GambitItem = class(Turbine.UI.Control);
 
-GambitItem.EffectsOrder = {"Targets", "Range", "Dmg", "DoT", "Threat", "ToT", "Transfer", "Heal", "HoT", "Interrupt",
-                           "Finisher", "Daze", "Fear", "Knockout", "Root", "Defence", "Special", "Other"}
+GambitItem.EffectsOrder = {"Targets", "Range", "Chain", "Potency", "Dmg", "DoT", "Threat", "ToT", "Heal", "HoT",
+                           "Interrupt", "Daze", "Fear", "Knockout", "Root", "Buff", "Special", "Other"}
 
 function GambitItem:Constructor(gambitID)
     Turbine.UI.Control.Constructor(self);
@@ -47,7 +47,6 @@ function GambitItem:Constructor(gambitID)
         self.effects:SetForeColor(Settings.Gambit.Builder.Text.Default);
         self.effects:SetOpacity(Settings.Window.Opacity);
 
-        local effectsArray = nil;
         local effectsArray = {};
         if gambit.Default ~= nil then
             for k, v in pairs(gambit.Default) do
@@ -98,25 +97,27 @@ function GambitItem:SetEffectsLabel(gambit)
 
                 -- Threat
             elseif effect == "Threat" then
-                self.effects:AppendText("<rgb=#FFBB33>" .. gambit[effect] .. "</rgb>");
-            elseif effect == "ToT" or effect == "Transfer" then
-                self.effects:AppendText("<rgb=#FFBB33>" .. gambit[effect] .. "</rgb>");
+                self.effects:AppendText("<rgb=#FFBB33>T</rgb>");
+            elseif effect == "ToT" then
+                self.effects:AppendText("<rgb=#FFBB33>ToT</rgb>");
 
                 -- Healing
             elseif effect == "Heal" then
-                self.effects:AppendText("<rgb=#99CC00>" .. effect .. "</rgb>");
+                self.effects:AppendText("<rgb=#99CC00>H</rgb>");
             elseif effect == "HoT" then
-                self.effects:AppendText("<rgb=#99CC00>" .. effect .. "</rgb>");
+                self.effects:AppendText("<rgb=#99CC00>HoT</rgb>");
 
-                -- Defence
-            elseif effect == "Defence" then
+                -- Buff
+            elseif effect == "Buff" then
                 self.effects:AppendText("<rgb=#33B5E5>" .. gambit[effect] .. "</rgb>");
 
                 -- Specials
             elseif effect == "Interrupt" then
                 self.effects:AppendText("<rgb=#AA66CC>Interr.</rgb>");
-            elseif effect == "Finisher" then
-                self.effects:AppendText("<rgb=#FFFFFF>F</rgb>");
+            elseif effect == "Potency" then
+                self.effects:AppendText("<rgb=#FFFFFF>P</rgb>");
+            elseif effect == "Chain" then
+                self.effects:AppendText("<rgb=#FFFFFF>" .. gambit[effect] .. "</rgb>");
             elseif effect == "Daze" or effect == "Fear" or effect == "Root" or effect == "Knockout" then
                 self.effects:AppendText("<rgb=#AA66CC>" .. gambit[effect] .. "s " .. effect .. "</rgb>");
             elseif effect == "Special" then

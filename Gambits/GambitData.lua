@@ -6,177 +6,264 @@
 -- ["WayOfTheWarden"] = 4
 GambitData = {
 
-    -- Adroit Manoeuvre (1091478097)
+    -- Adroit Manoeuvre (1092813466)
     -- Boar's Rush (1091471261)
     -- Brink of Victory (1091471251)
+    -- Cauterizing Steel (1092809827) *
     -- Celebration of Skill (1091471258)
     -- Combination Strike (1091471242)
     -- Conviction (1091478183)
-    -- Dance Of War (1091471266)
+    -- Dance of War (1092810675)
     -- Defensive Strike (1091469970)
+    -- Deflection (1092810683)
     -- Deft Strike (1091469969)
     -- Desolation (1091478186)
     -- Exultation of Battle (1091471252)
     -- Fierce Resolve (1091471255)
     -- Goad (1091469968)
     -- Impressive Flourish (1091469960)
-    -- Maddening Strike (1091471254)
+    -- Javelin of Fate (1092809825) *
+    -- Javelin of Virtue (1091471244) *
+    -- Maddening Strike (1092810680)
     -- Mighty Blow (1091471263)
     -- Offensive Strike (1091469961)
     -- Onslaught (1091471232)
-    -- Persevere (1091469964)
+    -- Persevere (1092810674)
     -- Piercing Strike (1091471245)
+    -- Piercing Toss (1091471245) *
     -- Power Attack (1091471256)
     -- Precise Blow (1091471262)
+    -- Precise Throw (1091471262) *
+    -- Ranged Adroit Manoeuvre (1091713176)
+    -- Ranged Boar's Rush (1091713179)
+    -- Ranged Boot (1091713170)
+    -- Ranged Cauterizing Steel (1092810687)
+    -- Ranged Celebration of Skill (1091471258)
+    -- Ranged Combination Strike (1091713174)
+    -- Ranged Deft Strike (1091713169)
+    -- Ranged Exultation of Battle (1091471252)
+    -- Ranged Fierce Resolve (1091471255)
+    -- Ranged Mighty Blow (1091713177)
+    -- Ranged Offensive Strike (1091713171)
+    -- Ranged Onslaught (1091713173)
+    -- Ranged Persevere (1092810674)
+    -- Ranged Power Attack (1091713172)
+    -- Ranged Resolution (1091471249)
+    -- Ranged Resounding Challenge (1091744833)
+    -- Ranged Restoration (1091471247)
+    -- Ranged Reversal (1091713175)
+    -- Ranged Safeguard (1091471259)
+    -- Ranged The Dark Before Dawn (1092812616)
+    -- Ranged Unerring Strike (1091713182)
+    -- Ranged Unseen Strikes (1092810676)
+    -- Ranged Wall of Steel (1091713178)
+    -- Ranged Warden's Triumph (1091713181)
+    -- Readied Blade (1092809829) *
     -- Resolution (1091471249)
     -- Resounding Challenge (1091744833)
     -- Restoration (1091471247)
     -- Reversal (1091478098)
     -- Safeguard (1091471259)
-    -- Shield Mastery (1091471248)
-    -- Shield Tactics (1091659503)
+    -- Shield Mastery (1092810684)
+    -- Shield Tactics (1092810677)
+    -- Shield Up (1092810686) *
+    -- Spear of Fate (1092809825) *
     -- Spear of Virtue (1091471244)
     -- Surety of Death (1091471237)
     -- The Boot (1091509864)
-    -- The Dark Before Dawn (1091471253)
+    -- The Dark Before Dawn (1092812619)
     -- Unerring Strike (1091585378)
+    -- Unseen Strikes (1092810679) *
     -- Wall of Steel (1091471267)
     -- War-cry (1091471234)
     -- Warden's Triumph (1091478187)
 
-    [1091478097] = {
+    [1092810683] = {
+        Name = "Deflection",
+        Combo = {3, 2, 1},
+        Default = {
+            Targets = 10,
+            Range = "30m",
+            Special = "-AoE threat"
+        },
+        Assailment = {},
+        Determination = {}
+    },
+
+    [1092809829] = {
+        Name = "Readied Blade",
+        Combo = {2, 3, 1},
+        Default = {
+            Buff = "parry"
+        },
+        Assailment = {},
+        Determination = {}
+    },
+
+    [1092810686] = {
+        Name = "Shield Up",
+        Combo = {2, 1, 3},
+        Default = {
+            Buff = "block"
+        },
+        Assailment = {},
+        Determination = {}
+    },
+
+    [1092809825] = {
+        Name = "Spear of Fate",
+        Combo = {3, 1, 3, 1, 3},
+        Default = {
+            Dmg = true,
+            DoT = true
+        },
+        Assailment = {
+            Range = "30m"
+        },
+        Determination = {}
+    },
+
+    [1092810679] = {
+        Name = "Unseen Strikes",
+        Combo = {1, 3, 1, 3, 1},
+        Default = {
+            Targets = 6,
+            Dmg = true,
+            Chain = "F2"
+        },
+        Assailment = {},
+        Determination = {}
+    },
+
+    [1092813466] = {
         Name = "Adroit Manoeuvre",
         Combo = {1, 3, 2, 1},
         Default = {
-            Special = "-16% attack duration"
+            Dmg = true,
+            Buff = "finesse",
+            Special = "-attack dur."
         },
         Assailment = {
-            Range = "25m",
-            Dmg = "232.2%"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = "270.9%"
-        }
+        Determination = {}
     },
     [1091471261] = {
         Name = "Boar's Rush",
         Combo = {1, 3, 1, 3},
         Default = {
-            Daze = 5
+            Targets = 6,
+            Dmg = true
         },
         Assailment = {
-            Range = "25m",
-            Dmg = 1308,
-            Other = "+stack/-4% dmg"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = 1656,
-            Other = "-10% healing"
-        }
+        Determination = {}
     },
     [1091471251] = {
         Name = "Brink of Victory",
         Combo = {3, 2, 3},
         Default = {
-            Dmg = 1926,
-            DoT = 1926,
-            Defence = "evade"
+            Targets = 6,
+            Dmg = true,
+            DoT = true,
+            Chain = "S2"
         },
         Assailment = {},
         Determination = {
-            Threat = "1T"
+            Threat = true
         }
+    },
+    [1092809827] = {
+        Name = "Cauterizing Steel",
+        Combo = {1, 2, 1, 2, 1},
+        Default = {
+            Dmg = true,
+            Other = "-phys mit.",
+            Chain = "F1"
+        },
+        Assailment = {},
+        Determination = {}
     },
     [1091471258] = {
         Name = "Celebration of Skill",
         Combo = {2, 1, 2, 1},
         Default = {
-            Dmg = "454.7%"
+            Dmg = true,
+            Heal = true
         },
         Assailment = {
-            Range = "25m",
-            Hot = "861"
+            Range = "30m"
         },
-        Determination = {
-            Threat = "2T",
-            Defence = "block",
-            Other = "+3.5% heal",
-            Finisher = true
-        }
+        Determination = {}
     },
     [1091471242] = {
         Name = "Combination Strike",
         Combo = {1, 3, 1},
-        Default = {},
-        Assailment = {
-            Range = "25m",
-            Dot = "406.4%",
-            Other = "+stack/-2% dmg"
+        Default = {
+            Targets = 6,
+            Dmg = true
         },
-        Determination = {
-            Dmg = "270.9% x2",
-            Other = "-10% healing"
-        }
+        Assailment = {
+            Range = "30m"
+        },
+        Determination = {}
     },
     [1091478183] = {
         Name = "Conviction",
         Combo = {2, 3, 2, 3, 2},
         Default = {
-            HoT = 682,
+            Range = "30m",
+            Heal = true,
+            HoT = true,
             Special = "fellowship wide",
-            Defence = "crit/tact"
+            Buff = "tact/evade"
         },
         Assailment = {},
         Determination = {}
     },
-    [1091471266] = {
+    [1092810675] = {
         Name = "Dance Of War",
         Combo = {2, 3, 2, 3},
         Default = {
-            Defence = "crit/phys"
+            Buff = "phys/evade"
         },
-        Assailment = {
-            Range = "25m"
-        },
-        Determination = {
-            Finisher = true
-        }
+        Assailment = {},
+        Determination = {}
     },
     [1091469970] = {
         Name = "Defensive Strike",
         Combo = {2, 2},
         Default = {
-            Dmg = "435.4%"
+            Dmg = true,
+            Potency = true
         },
         Assailment = {},
-        Determination = {
-            Defence = "block"
-        }
+        Determination = {}
     },
     [1091469969] = {
         Name = "Deft Strike",
         Combo = {1, 1},
-        Default = {},
-        Assailment = {
-            Dmg = "232.2%",
-            Range = "25m"
+        Default = {
+            Dmg = true,
+            Potency = true
         },
-        Determination = {
-            Dmg = "270.9%"
-        }
+        Assailment = {
+            Range = "30m"
+        },
+        Determination = {}
     },
     [1091478186] = {
         Name = "Desolation",
         Combo = {3, 2, 3, 2, 3},
         Default = {
             Targets = 6,
-            Dmg = 2838,
-            DoT = 2838,
-            Other = "+5% miss"
+            Dmg = true,
+            DoT = true
         },
         Assailment = {},
         Determination = {
-            Finisher = true
+            Chain = "F1"
         }
     },
     [1091471252] = {
@@ -184,16 +271,16 @@ GambitData = {
         Combo = {3, 1, 2, 3, 2},
         Default = {
             Targets = 10,
-            Dmg = 931,
-            Heal = 490,
-            DoT = 931,
-            HoT = 490
+            Dmg = true,
+            Heal = true,
+            DoT = true,
+            HoT = true
         },
         Assailment = {
-            Range = "25m"
+            Range = "30m"
         },
         Determination = {
-            ToT = "2ToT"
+            ToT = true
         }
     },
     [1091471255] = {
@@ -201,13 +288,13 @@ GambitData = {
         Combo = {3, 1, 2},
         Default = {
             Targets = 10,
-            Dmg = 248,
-            Heal = 248,
-            DoT = 248,
-            HoT = 248
+            Dmg = true,
+            Heal = true,
+            DoT = true,
+            HoT = true
         },
         Assailment = {
-            Range = "25m"
+            Range = "30m"
         },
         Determination = {}
     },
@@ -216,31 +303,30 @@ GambitData = {
         Combo = {3, 3},
         Default = {
             Targets = 5,
-            Dmg = 732,
-            DoT = 732
+            Dmg = true,
+            Potency = true
         },
         Assailment = {},
         Determination = {
-            Threat = "0.5T"
+            Threat = true
         }
     },
     [1091469960] = {
         Name = "Impressive Flourish",
         Combo = {2, 3},
         Default = {
-            Dmg = 1742,
-            DoT = 732,
-            Defence = "crit/phys/tact"
+            Dmg = true,
+            Buff = "parry"
         },
         Assailment = {},
         Determination = {}
     },
-    [1091471254] = {
+    [1092810680] = {
         Name = "Maddening Strike",
         Combo = {2, 3, 2},
         Default = {
-            Dmg = "677.3%",
-            Defence = "crit/phys/tact"
+            Dmg = true,
+            Buff = "evade"
         },
         Assailment = {},
         Determination = {}
@@ -248,122 +334,97 @@ GambitData = {
     [1091471263] = {
         Name = "Mighty Blow",
         Combo = {1, 2, 3, 1},
-        Default = {},
-        Assailment = {
-            Range = "25m",
-            Dmg = "232.2%"
+        Default = {
+            Dmg = true,
+            DoT = true,
+            Chain = "S1"
         },
-        Determination = {
-            Dmg = "270.9%",
-            Dot = "270.9%",
-            Other = "+stack"
-        }
+        Assailment = {
+            Range = "30m"
+        },
+        Determination = {}
     },
     [1091469961] = {
         Name = "Offensive Strike",
         Combo = {1, 3},
         Default = {
-            Dmg = 2,
-            DoT = 188,
-            HoT = 188
+            Targets = 6,
+            Dmg = true
         },
         Assailment = {
-            Range = "25m",
-            Dmg = "406.4%",
-            Other = "-2% dmg"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = "270.9% x2",
-            Dot = 283,
-            Hot = 283,
-            Other = "-10% healing",
-            Threat = "2T"
-        }
+        Determination = {}
     },
     [1091471232] = {
         Name = "Onslaught",
         Combo = {1, 2, 1},
         Default = {
-            Interrupt = true
+            Dmg = true,
+            Other = "-phys mit."
         },
         Assailment = {
-            Range = "25m",
-            Dmg = "520.5%"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = "241.9% x3"
-        }
+        Determination = {}
     },
-    [1091469964] = {
+    [1092810674] = {
         Name = "Persevere",
         Combo = {2, 1},
         Default = {
-            Dmg = "454.7%"
+            Dmg = true,
+            Heal = true,
+            HoT = true,
+            Special = "+inc heal"
         },
         Assailment = {
-            Range = "25m",
-            HoT = 288
+            Range = "30m"
         },
-        Determination = {
-            Threat = "2T",
-            Defence = "block",
-            HoT = 430
-        }
+        Determination = {}
     },
     [1091471245] = {
         Name = "Piercing Strike",
         Combo = {3, 1, 3},
-        Default = {},
-        Assailment = {
-            Dmg = "193.5%",
-            Range = "25m",
-            Other = "-crit defence"
+        Default = {
+            Dmg = true,
+            DoT = true
         },
-        Determination = {
-            Dmg = "251.6%",
-            Dot = 2266,
-            Threat = "1T"
-        }
+        Assailment = {},
+        Determination = {}
     },
     [1091471256] = {
         Name = "Power Attack",
         Combo = {1, 2, 3},
-        Default = {},
-        Assailment = {
-            Range = "25m",
-            Dmg = "232.2%"
+        Default = {
+            Dmg = true,
+            DoT = true,
+            Chain = "S1"
         },
-        Determination = {
-            Dmg = "270.9%",
-            Dot = 954
-        }
+        Assailment = {
+            Range = "30m"
+        },
+        Determination = {}
     },
     [1091471262] = {
         Name = "Precise Blow",
         Combo = {3, 1},
-        Default = {},
-        Assailment = {
-            Dmg = "193.5%",
-            Range = "25m",
-            Other = "-crit defence"
+        Default = {
+            Dmg = true,
+            DoT = true
         },
-        Determination = {
-            Dmg = "256.1%",
-            Dot = "953",
-            Threat = "2T",
-            ToT = "2ToT"
-        }
+        Assailment = {},
+        Determination = {}
     },
     [1091471249] = {
         Name = "Resolution",
         Combo = {3, 1, 2, 3},
         Default = {
             Targets = 10,
-            Dmg = 1206,
-            Heal = 1206
+            Dmg = true,
+            Heal = true
         },
         Assailment = {
-            Range = "25m"
+            Range = "30m"
         },
         Determination = {}
     },
@@ -371,79 +432,69 @@ GambitData = {
         Name = "Resounding Challenge",
         Combo = {3, 2, 3, 1},
         Default = {
-            Targets = 6,
-            Range = "25m"
+            Targets = 10,
+            Range = "20m",
+            Dmg = true,
+            DoT = true
         },
         Assailment = {
-            Dmg = 1480,
-            Dot = 732
+            Range = "30m"
         },
-        Determination = {
-            Dmg = 2605,
-            Threat = "3T"
-        }
+        Determination = {}
     },
     [1091471247] = {
         Name = "Restoration",
         Combo = {2, 1, 2, 1, 2},
         Default = {
-            HoT = 1511
+            Dmg = true,
+            Heal = true,
+            HoT = true
         },
         Assailment = {
-            Dmg = "251.6%",
-            Range = "25m"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = "454.7%",
-            Threat = "2T",
-            Finisher = true
-        }
+        Determination = {}
     },
     [1091478098] = {
         Name = "Reversal",
         Combo = {1, 3, 2},
         Default = {
+            Dmg = true,
             Special = "-corruptions"
         },
         Assailment = {
-            Range = "25m",
-            Dmg = "232.2%"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = "270.9%"
-        }
+        Determination = {}
     },
     [1091471259] = {
         Name = "Safeguard",
         Combo = {2, 1, 2},
-        Default = {},
-        Assailment = {
-            Range = "25m",
-            Dmg = 244,
-            Hot = 608
+        Default = {
+            Dmg = true,
+            Heal = true,
+            HoT = true
         },
-        Determination = {
-            Dmg = 441,
-            HoT = 1129,
-            Defence = "block",
-            Threat = "2T"
-        }
+        Assailment = {
+            Range = "30m"
+        },
+        Determination = {}
     },
-    [1091471248] = {
+    [1092810684] = {
         Name = "Shield Mastery",
         Combo = {2, 1, 3, 2},
         Default = {
-            Defence = "block/evade/ranged"
+            Buff = "block"
         },
         Assailment = {},
         Determination = {}
     },
-    [1091659503] = {
+    [1092810677] = {
         Name = "Shield Tactics",
         Combo = {2, 3, 1, 2},
         Default = {
-            Defence = "tactical",
-            Special = "+stun immunity"
+            Buff = "crit def.",
+            Special = "stun immunity"
         },
         Assailment = {},
         Determination = {}
@@ -452,115 +503,99 @@ GambitData = {
         Name = "Spear of Virtue",
         Combo = {3, 1, 3, 1},
         Default = {
-            Dot = 3019
+            Dmg = true,
+            DoT = true
         },
         Assailment = {
-            Dmg = "193.5%",
-            Range = "25m",
-            Other = "-crit defence"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = "251.6%",
-            Threat = "3T"
-        }
+        Determination = {}
     },
     [1091471237] = {
         Name = "Surety of Death",
         Combo = {3, 2, 3, 2},
         Default = {
             Targets = 6,
-            Dmg = "435.4%",
-            DoT = 2567,
-            Defence = "b/p/e"
+            Dmg = true,
+            DoT = true,
+            Chain = "S2"
         },
         Assailment = {},
-        Determination = {
-            Threat = "3T",
-            Finisher = true
-        }
+        Determination = {}
     },
     [1091509864] = {
         Name = "The Boot",
         Combo = {1, 2},
         Default = {
+            Dmg = true,
+            Other = "-phys mit.",
             Interrupt = true
         },
         Assailment = {
-            Dmg = 312
+            Range = "30m"
         },
-        Determination = {
-            Dmg = 436
-        }
+        Determination = {}
     },
-    [1091471253] = {
+    [1092812619] = {
         Name = "The Dark Before Dawn",
         Combo = {1, 2, 1, 3, 1},
         Default = {
+            Dmg = true,
             Special = "+power"
         },
         Assailment = {
-            Range = "25m",
-            Dmg = "406.4%"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = "270.9% x2"
-        }
+        Determination = {}
     },
     [1091585378] = {
         Name = "Unerring Strike",
         Combo = {1, 2, 3, 1, 2},
-        Default = {},
-        Assailment = {
-            Range = "25m",
-            Dmg = "232.2%"
+        Default = {
+            Dmg = true,
+            DoT = true,
+            Chain = "S1"
         },
-        Determination = {
-            Dmg = "270.9%",
-            Dot = 2625,
-            Other = "+stack"
-        }
+        Assailment = {
+            Range = "30m"
+
+        },
+        Determination = {}
     },
     [1091471267] = {
         Name = "Wall of Steel",
         Combo = {1, 2, 1, 2},
         Default = {
-            Interrupt = true
+            Dmg = true,
+            Other = "-phys mit."
         },
         Assailment = {
-            Range = "25m",
-            Dmg = "609.5%"
+            Range = "30m"
         },
-        Determination = {
-            Dmg = "270.9% x3",
-            Defence = "parry"
-        }
+        Determination = {}
     },
     [1091471234] = {
         Name = "War-cry",
         Combo = {3, 2},
         Default = {
             Targets = 10,
-            Dmg = 732,
-            DoT = 732
+            Dmg = true,
+            DoT = true,
+            Chain = "S2"
         },
         Assailment = {},
-        Determination = {
-            Defence = "evade",
-            Threat = "2T"
-        }
+        Determination = {}
     },
     [1091478187] = {
         Name = "Warden's Triumph",
         Combo = {1, 3, 2, 1, 3},
-        Default = {},
-        Assailment = {
-            Range = "25m",
-            Dmg = "232.2%",
-            Special = "5% ranged dmg"
+        Default = {
+            Dmg = true,
+            Buff = "dmg"
         },
-        Determination = {
-            Dmg = "270.9%",
-            Special = "+12% melee dmg"
-        }
+        Assailment = {
+            Range = "30m"
+        },
+        Determination = {}
     }
 }

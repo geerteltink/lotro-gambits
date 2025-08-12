@@ -78,16 +78,7 @@ function ConstructWindows()
     local skillCount = skills:GetCount();
     for i = 1, skillCount, 1 do
         local skill = Turbine.Gameplay.Skill.GetSkillInfo(skills:GetItem(i));
-        Debug("Gambit detected: " .. skill:GetName() .. " (" .. skill:GetIconImageID() .. ")" .. " - " ..
-                  skill:GetGambitCount());
         ActiveGambits[skill:GetIconImageID()] = skill:GetName();
-    end
-
-    local xskills = player:GetClassAttributes():GetUntrainedGambits();
-    local xskillCount = xskills:GetCount();
-    for i = 1, xskillCount, 1 do
-        local xskill = Turbine.Gameplay.Skill.GetSkillInfo(xskills:GetItem(i));
-        Debug("Untrained Gambit detected: " .. xskill:GetName() .. " (" .. xskill:GetIconImageID() .. ")");
     end
 
     -- Create gambit windows
@@ -199,6 +190,8 @@ DetectStance();
 ConstructWindows();
 PositionWindows();
 Core.DetectMount();
+
+-- Settings.GetAllSkills();
 
 -- Load message
 Turbine.Shell.WriteLine(plugin:GetName() .. " v" .. plugin:GetVersion() .. " by " .. plugin:GetAuthor());
