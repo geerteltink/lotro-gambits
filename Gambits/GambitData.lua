@@ -78,28 +78,6 @@ GambitData = {
     -- War-cry (1091471234)
     -- Warden's Triumph (1091478187)
 
-    [1092810683] = {
-        Name = "Deflection",
-        Combo = {3, 2, 1},
-        Default = {
-            Targets = 10,
-            Range = "30m",
-            Special = "-AoE threat"
-        },
-        Assailment = {},
-        Determination = {}
-    },
-
-    [1092809829] = {
-        Name = "Readied Blade",
-        Combo = {2, 3, 1},
-        Default = {
-            Buff = "parry"
-        },
-        Assailment = {},
-        Determination = {}
-    },
-
     [1092810686] = {
         Name = "Shield Up",
         Combo = {2, 1, 3},
@@ -171,7 +149,7 @@ GambitData = {
         },
         Assailment = {},
         Determination = {
-            Threat = true
+            ToT = 2
         }
     },
     [1092809827] = {
@@ -220,7 +198,9 @@ GambitData = {
             Buff = "tact/evade"
         },
         Assailment = {},
-        Determination = {}
+        Determination = {
+            Threat = 1
+        }
     },
     [1092810675] = {
         Name = "Dance Of War",
@@ -240,6 +220,21 @@ GambitData = {
         },
         Assailment = {},
         Determination = {}
+    },
+    [1092810683] = {
+        Name = "Deflection",
+        Combo = {3, 2, 1},
+        Default = {
+            Targets = 10,
+            Range = "30m"
+        },
+        Assailment = {},
+        Determination = {
+            Threat = 2
+        },
+        Recklessness = {
+            Special = "-AoE threat"
+        }
     },
     [1091469969] = {
         Name = "Deft Strike",
@@ -263,6 +258,7 @@ GambitData = {
         },
         Assailment = {},
         Determination = {
+            ToT = 2,
             Chain = "F1"
         }
     },
@@ -280,7 +276,7 @@ GambitData = {
             Range = "30m"
         },
         Determination = {
-            ToT = true
+            ToT = 2
         }
     },
     [1091471255] = {
@@ -296,7 +292,9 @@ GambitData = {
         Assailment = {
             Range = "30m"
         },
-        Determination = {}
+        Determination = {
+            ToT = 1
+        }
     },
     [1091469968] = {
         Name = "Goad",
@@ -308,7 +306,7 @@ GambitData = {
         },
         Assailment = {},
         Determination = {
-            Threat = true
+            ToT = 1
         }
     },
     [1091469960] = {
@@ -319,7 +317,9 @@ GambitData = {
             Buff = "parry"
         },
         Assailment = {},
-        Determination = {}
+        Determination = {
+            ToT = 1
+        }
     },
     [1092810680] = {
         Name = "Maddening Strike",
@@ -329,7 +329,9 @@ GambitData = {
             Buff = "evade"
         },
         Assailment = {},
-        Determination = {}
+        Determination = {
+            Threat = 1
+        }
     },
     [1091471263] = {
         Name = "Mighty Blow",
@@ -415,6 +417,15 @@ GambitData = {
         Assailment = {},
         Determination = {}
     },
+    [1092809829] = {
+        Name = "Readied Blade",
+        Combo = {2, 3, 1},
+        Default = {
+            Buff = "parry"
+        },
+        Assailment = {},
+        Determination = {}
+    },
     [1091471249] = {
         Name = "Resolution",
         Combo = {3, 1, 2, 3},
@@ -426,7 +437,9 @@ GambitData = {
         Assailment = {
             Range = "30m"
         },
-        Determination = {}
+        Determination = {
+            Threat = 1
+        }
     },
     [1091744833] = {
         Name = "Resounding Challenge",
@@ -440,7 +453,10 @@ GambitData = {
         Assailment = {
             Range = "30m"
         },
-        Determination = {}
+        Determination = {
+            Threat = 3,
+            ToT = 2
+        }
     },
     [1091471247] = {
         Name = "Restoration",
@@ -521,7 +537,9 @@ GambitData = {
             Chain = "S2"
         },
         Assailment = {},
-        Determination = {}
+        Determination = {
+            ToT = 2
+        }
     },
     [1091509864] = {
         Name = "The Boot",
@@ -584,7 +602,9 @@ GambitData = {
             Chain = "S2"
         },
         Assailment = {},
-        Determination = {}
+        Determination = {
+            ToT = 1
+        }
     },
     [1091478187] = {
         Name = "Warden's Triumph",

@@ -54,11 +54,23 @@ function GambitItem:Constructor(gambitID)
             end
         end
 
-        if currentStance == "Determination" and gambit.Determination ~= nil then
+        if CurrentTraitLine == "Determination" and gambit.Determination ~= nil then
             for k, v in pairs(gambit.Determination) do
                 effectsArray[k] = v
             end
-        elseif currentStance == "Assailment" and gambit.Assailment ~= nil then
+        end
+
+        if CurrentTraitLine == "Recklessness" and gambit.Recklessness ~= nil then
+            for k, v in pairs(gambit.Recklessness) do
+                effectsArray[k] = v
+            end
+        end
+
+        if CurrentStance == "In the Fray" and gambit.InTheFray ~= nil then
+            for k, v in pairs(gambit.InTheFray) do
+                effectsArray[k] = v
+            end
+        elseif CurrentStance == "Assailment" and gambit.Assailment ~= nil then
             for k, v in pairs(gambit.Assailment) do
                 effectsArray[k] = v
             end

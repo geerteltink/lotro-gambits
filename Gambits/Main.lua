@@ -48,13 +48,15 @@ Settings.Load();
 
 ActiveGambits = {};
 GambitWindows = {};
-heightLeft = nil;
-heightRight = nil;
-currentStance = nil;
+HeightLeft = nil;
+HeightRight = nil;
+CurrentStance = nil;
+CurrentTraitLine = nil;
+
+LocalPlayer = Turbine.Gameplay.LocalPlayer.GetInstance();
+EffectList = LocalPlayer:GetEffects();
 
 Core.Start();
-
-player = Turbine.Gameplay.LocalPlayer:GetInstance();
 
 function Destroy()
     if GambitWindows ~= nil then
@@ -69,12 +71,12 @@ function ConstructWindows()
     -- Reset
     ActiveGambits = nil;
     GambitWindows = nil;
-    heightLeft = nil;
-    heightRight = nil;
+    HeightLeft = nil;
+    HeightRight = nil;
 
     -- Get all gambits
     ActiveGambits = {};
-    local skills = player:GetClassAttributes():GetTrainedGambits();
+    local skills = LocalPlayer:GetClassAttributes():GetTrainedGambits();
     local skillCount = skills:GetCount();
     for i = 1, skillCount, 1 do
         local skill = Turbine.Gameplay.Skill.GetSkillInfo(skills:GetItem(i));
@@ -83,18 +85,18 @@ function ConstructWindows()
 
     -- Create gambit windows
     GambitWindows = {};
-    heightLeft = Settings.Window.Offset.Bottom;
-    heightRight = Settings.Window.Offset.Bottom;
+    HeightLeft = Settings.Window.Offset.Bottom;
+    HeightRight = Settings.Window.Offset.Bottom;
 
     -- Construct each gambit window
     for i = 1, #GambitLayout do
         if (GambitLayout[i].Enabled) then
             local window = GambitWindow(GambitLayout[i]);
             if window.Placement == "left" then
-                heightLeft = heightLeft + window:GetHeight();
+                HeightLeft = HeightLeft + window:GetHeight();
                 table.insert(GambitWindows, window);
             elseif window.Placement == "right" then
-                heightRight = heightRight + window:GetHeight();
+                HeightRight = HeightRight + window:GetHeight();
                 table.insert(GambitWindows, window);
             else
                 -- Destroy window
@@ -111,69 +113,121 @@ function PositionWindows()
 
     for i = 1, #GambitWindows do
         if GambitWindows[i].Placement == "left" then
-            GambitWindows[i]:SetTop(screenHeight - heightLeft);
-            heightLeft = heightLeft - GambitWindows[i]:GetHeight();
+            GambitWindows[i]:SetTop(screenHeight - HeightLeft);
+            HeightLeft = HeightLeft - GambitWindows[i]:GetHeight();
         elseif GambitWindows[i].Placement == "right" then
-            GambitWindows[i]:SetTop(screenHeight - heightRight);
-            heightRight = heightRight - GambitWindows[i]:GetHeight();
+            GambitWindows[i]:SetTop(screenHeight - HeightRight);
+            HeightRight = HeightRight - GambitWindows[i]:GetHeight();
         end
     end
 end
 
 function DetectStance()
-    local stance = player:GetClassAttributes():GetStance();
+    local stance = LocalPlayer:GetClassAttributes():GetStance();
     local newStance = nil;
 
     if stance == 0 then
         newStance = "None";
     elseif stance == 1 then
-        newStance = "Recklessness";
+        newStance = "None";
     elseif stance == 2 then
-        newStance = "Determination";
+        newStance = "In the Fray";
     elseif stance == 3 then
         newStance = "Assailment";
     end
 
-    if newStance ~= currentStance then
-        currentStance = newStance;
-        Debug("Warden stance changed to " .. currentStance .. ".");
+    if newStance ~= CurrentStance then
+        CurrentStance = newStance;
+        Debug("Warden stance changed to " .. CurrentStance .. ".");
     end
+
     --[[
     -- Go through all stances
     for k,v in pairs(Turbine.Gameplay.Attributes.WardenStance) do
         if (v == stance) then
-            currentStance = k;
+            CurrentStance = k;
             Debug("Warden stance changed to " .. k .. ".");
         end
     end
 ]] --
 end
 
--- Register callback function for new added skills
-Turbine.Gameplay.SkillList.SkillAdded = function(sender, args)
-    local skill = Turbine.Gameplay.Skill.GetSkillInfo(args.Skill);
-    -- Update only if it is a gambit
-    if skill:GetType() == Turbine.Gameplay.SkillType.Gambit then
-        Debug("New gambit detected: " .. skill:GetName() .. ". Updating gambit windows.");
-        Destroy();
-        DetectStance();
-        ConstructWindows();
-        PositionWindows();
-        Core.DetectMount();
+function DetectTraitLine()
+    -- You have acquired the Class Specialization Bonus Trait: Determination.
+    -- You have acquired the Class Specialization Bonus Trait: Recklessness.
+
+    local skillList = LocalPlayer:GetTrainedSkills();
+    local skillCount = skillList:GetCount();
+    for i = 1, skillCount, 1 do
+        local skill = skillList:GetItem(i);
+        local skillInfo = skill:GetSkillInfo();
+        local skillName = skillInfo:GetName();
+        -- Skills from Determination: Warning Shot,Restorative Shield-work
+        -- Traits from blue line: Desperate Combat, Desperate Spear
+        if skillName == "Warning Shot" or skillName == "Restorative Shield-work" or skillName == "Desperate Combat" or
+            skillName == "Desperate Spear" then
+            Debug("Detected trait line: Determination");
+            CurrentTraitLine = "Determination";
+            return;
+        end
     end
+
+    -- Fall back to Recklessness as wardens cannot specify in Assailment
+    Debug("Detected trait line: Recklessness");
+    CurrentTraitLine = "Recklessness";
 end
 
--- Register callback function for stance changes
-Turbine.Gameplay.ClassAttributes.StanceChanged = function(sender, args)
+function ForceRepaintUI()
     Destroy();
     DetectStance();
+    DetectTraitLine();
     ConstructWindows();
     PositionWindows();
     Core.DetectMount();
 end
 
+-- Register callback function for new added skills
+Turbine.Gameplay.SkillList.SkillAdded = function(sender, args)
+    local traitLine = CurrentTraitLine;
+    local skill = Turbine.Gameplay.Skill.GetSkillInfo(args.Skill);
+    -- Update only if it is a gambit
+    if skill:GetType() == Turbine.Gameplay.SkillType.Gambit then
+        Debug("New gambit detected: " .. skill:GetName() .. ". Updating gambit windows.");
+        ForceRepaintUI();
+    else
+        Debug("New skill detected: " .. skill:GetName() .. ".");
+        DetectTraitLine();
+        if CurrentTraitLine ~= traitLine then
+            Debug("Trait line changed to " .. CurrentTraitLine .. ".");
+            ForceRepaintUI();
+        end
+    end
+end
+
+Turbine.Gameplay.SkillList.SkillRemoved = function(sender, args)
+    local traitLine = CurrentTraitLine;
+    local skill = Turbine.Gameplay.Skill.GetSkillInfo(args.Skill);
+    -- Update only if it is a gambit
+    if skill:GetType() == Turbine.Gameplay.SkillType.Gambit then
+        Debug("Gambit removed: " .. skill:GetName() .. ". Updating gambit windows.");
+        ForceRepaintUI();
+    else
+        Debug("Skill removed: " .. skill:GetName() .. "..");
+        DetectTraitLine();
+        if CurrentTraitLine ~= traitLine then
+            Debug("Trait line changed to " .. CurrentTraitLine .. ".");
+            ForceRepaintUI();
+        end
+    end
+end
+
+-- Register callback function for stance changes
+Turbine.Gameplay.ClassAttributes.StanceChanged = function(sender, args)
+    ForceRepaintUI();
+end
+
 -- Register callback function for mount changes
-player.MountChanged = function(sender, args)
+LocalPlayer.MountChanged = function(sender, args)
     Core.DetectMount();
 end
 
@@ -182,11 +236,12 @@ Turbine.Plugin.Unload = function(sender, args)
     -- Save the data when the plugin unloads.
     -- saveData();
 
-    Debug("Plugin " .. Settings.GetPluginName() .. " unloading...");
+    Debug("Plugin " .. Settings.GetPluginName() .. " unloaded.");
 end
 
 -- Start building something
 DetectStance();
+DetectTraitLine();
 ConstructWindows();
 PositionWindows();
 Core.DetectMount();

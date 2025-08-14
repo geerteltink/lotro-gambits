@@ -51,8 +51,8 @@ function Core.SetHudVisibility(visible)
     end
 
     -- Force visibility to false when mounted
-    local mount = player:GetMount();
-    if (player:GetMount() ~= nil) then
+    local mount = LocalPlayer:GetMount();
+    if (LocalPlayer:GetMount() ~= nil) then
         visible = false;
     end
 
@@ -63,7 +63,7 @@ function Core.SetHudVisibility(visible)
 end
 
 function Core.DetectMount()
-    if (player:GetMount() == nil) then
+    if (LocalPlayer:GetMount() == nil) then
         -- Not mounted
         Core.SetHudVisibility(true);
     else

@@ -3,7 +3,7 @@
     <Information>
         <Name>Gambits</Name>
         <Author>XtreamWayz</Author>
-        <Version>1.0.0</Version>
+        <Version>2.0.0</Version>
         <Description>Yet another gambit helper</Description>
     </Information>
     <Package>XtreamWayz.Gambits.Main</Package>
