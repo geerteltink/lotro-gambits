@@ -26,15 +26,15 @@ function Settings:_SetDefaults()
 
     self.version = plugin:GetVersion();
     self.pluginName = plugin:GetName();
-    self.opacity = 0.7;
+    self.opacity = 0.5;
 
     Settings.Window = {
         Opacity = self.opacity,
-        Width = 200,
+        Width = 180,
         Offset = {
-            Left = (screenWidth / 2) - 450,
-            Right = (screenWidth / 2) + 300,
-            Bottom = 80
+            Left = (screenWidth / 2) - 400,
+            Right = (screenWidth / 2) + 250,
+            Bottom = 100
         },
         Font = Turbine.UI.Lotro.Font.Verdana10,
         Background = RGBA(0, 0, 0, self.opacity)
