@@ -46,7 +46,7 @@ function GambitWindow:Constructor(window)
         self:SetVisible(true);
     else
         self:SetVisible(false);
-        self.Placement = none;
+        self.Placement = nil;
     end
 end
 

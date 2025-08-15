@@ -16,7 +16,7 @@ function GambitBuilder:Constructor(target, build, pos)
     self:SetForeColor(Settings.Gambit.Builder.Text.Default);
 
     if build == 1 then
-        if currentStance == "Assailment" then
+        if CurrentStance == "Assailment" then
             self:SetBackColor(Settings.Gambit.Builder.Background.Javelin);
         else
             self:SetBackColor(Settings.Gambit.Builder.Background.Spear);

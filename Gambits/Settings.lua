@@ -32,12 +32,12 @@ function Settings:_SetDefaults()
         Opacity = self.opacity,
         Width = 200,
         Offset = {
-            Left = (screenWidth/2) - 450,
-            Right = (screenWidth/2) + 300,
-            Bottom = 80,
+            Left = (screenWidth / 2) - 450,
+            Right = (screenWidth / 2) + 300,
+            Bottom = 80
         },
         Font = Turbine.UI.Lotro.Font.Verdana10,
-        Background = RGBA(0, 0, 0, self.opacity),
+        Background = RGBA(0, 0, 0, self.opacity)
     };
 
     Settings.Gambit = {
@@ -50,13 +50,13 @@ function Settings:_SetDefaults()
                 Shield = RGBA(78, 113, 41, self.opacity),
                 Fist = RGBA(195, 160, 60, self.opacity),
                 Javelin = RGBA(204, 108, 0, self.opacity),
-                Default = RGBA(34, 34, 34, self.opacity),
+                Default = RGBA(34, 34, 34, self.opacity)
             },
 
             Outline = RGBA(51, 51, 51, self.opacity),
 
             Text = {
-                Default = RGBA(204, 204, 204, self.opacity),
+                Default = RGBA(204, 204, 204, self.opacity)
             }
         }
     };

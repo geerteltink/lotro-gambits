@@ -4,7 +4,7 @@ import "Turbine.UI";
 --[[
     A Core class that will listen to keydown.
     It's better to have 1 core window that handles this then all seperate windows.
-]]--
+]] --
 Core = class(Turbine.UI.Control);
 
 function Core:Constructor(window)
@@ -38,9 +38,9 @@ function Core.KeyDown(sender, args)
     if (args.Action == Turbine.UI.Lotro.Action.Escape) then
         Core.hudVisible = true;
         Core.SetHudVisibility(Core.hudVisible);
-    -- Toggle HUD
+        -- Toggle HUD
     elseif (args.Action == 268435635) then
-        Core.hudVisible =not Core.hudVisible;
+        Core.hudVisible = not Core.hudVisible;
         Core.SetHudVisibility(Core.hudVisible);
     end
 end
@@ -51,8 +51,8 @@ function Core.SetHudVisibility(visible)
     end
 
     -- Force visibility to false when mounted
-    local mount = player:GetMount();
-    if (player:GetMount() ~= nil) then
+    local mount = LocalPlayer:GetMount();
+    if (LocalPlayer:GetMount() ~= nil) then
         visible = false;
     end
 
@@ -63,7 +63,7 @@ function Core.SetHudVisibility(visible)
 end
 
 function Core.DetectMount()
-    if (player:GetMount() == nil) then
+    if (LocalPlayer:GetMount() == nil) then
         -- Not mounted
         Core.SetHudVisibility(true);
     else
