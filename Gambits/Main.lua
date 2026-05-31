@@ -18,6 +18,9 @@
 -- Turbine.Gameplay.LocalPlayer:GetInstance():GetClassAttributes():GetTrainedGambits()
 -- Turbine.Gameplay.LocalPlayer:GetInstance():GetClassAttributes():GetUntrainedGambits()
 -- return a Turbine.Gameplay.SkillList object. (The last two only work for Wardens, of course.)
+-- Turbine.Gameplay.LocalPlayer.GetInstance():GetClassAttributes():GetGambitCount()
+-- Turbine.Gameplay.LocalPlayer.GetInstance():GetClassAttributes():GetGambit(i)
+
 -- Turbine imports..
 import "Turbine";
 import "Turbine.Gameplay";
@@ -54,6 +57,7 @@ CurrentStance = nil;
 CurrentTraitLine = nil;
 
 LocalPlayer = Turbine.Gameplay.LocalPlayer.GetInstance();
+PlayerAttributes= LocalPlayer:GetClassAttributes();
 EffectList = LocalPlayer:GetEffects();
 
 Core.Start();
@@ -218,6 +222,40 @@ Turbine.Gameplay.SkillList.SkillRemoved = function(sender, args)
             Debug("Trait line changed to " .. CurrentTraitLine .. ".");
             ForceRepaintUI();
         end
+    end
+end
+
+-- Register callback function for current gambit detection
+PlayerAttributes.GambitChanged = function(sender, args)
+    local count = PlayerAttributes:GetGambitCount();
+    Debug("Gambit changed, new count: " .. count .. "..");
+
+    if count == 0 then
+        Debug("No active gambits.");
+        return;
+    end
+
+    local combo = {};
+    for i = 1, count do
+        local gambit = PlayerAttributes:GetGambit(i);
+        -- 2 is shield -> 2
+        -- 3 is fist   -> 3
+        -- 4 is spear  -> 1
+
+        if gambit == 4 then
+            table.insert(combo, 1);
+        elseif gambit == 2 then
+            table.insert(combo, 2);
+        elseif gambit == 3 then
+            table.insert(combo, 3);
+        end
+    end
+
+    local name, id = GetActiveGambitByCombo(combo);
+    if name then
+        Debug("Active gambit: " .. name .. " (ID: " .. tostring(id) .. ")");
+    else
+        Debug("No matching gambit found for combo: " .. table.concat(combo, ", "));
     end
 end
 

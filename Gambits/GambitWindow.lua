@@ -65,3 +65,22 @@ function GambitWindow:Destroy()
         self.gambits = nil;
     end
 end
+
+function GetActiveGambitByCombo(combo)
+    for id, data in pairs(GambitData) do
+        local gCombo = data.Combo
+        if #gCombo == #combo then
+            local match = true
+            for i = 1, #combo do
+                if gCombo[i] ~= combo[i] then
+                    match = false
+                    break
+                end
+            end
+            if match then
+                return data.Name, id
+            end
+        end
+    end
+    return nil
+end
