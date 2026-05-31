@@ -3,7 +3,7 @@ import "Turbine.UI";
 
 --[[
     A Core class that will listen to keydown.
-    It's better to have 1 core window that handles this then all seperate windows.
+    It's better to have 1 core window that handles this then all separate windows.
 ]] --
 Core = class(Turbine.UI.Control);
 
@@ -13,7 +13,7 @@ function Core:Constructor(window)
     -- This is a hidden control element
     self:SetVisible(false);
 
-    -- Enable keyevents (Actions) for this control
+    -- Enable key events (Actions) for this control
     self:SetWantsKeyEvents(true);
 
     -- Start with a full HUD
