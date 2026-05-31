@@ -26,7 +26,7 @@ function Settings:_SetDefaults()
 
     self.version = plugin:GetVersion();
     self.pluginName = plugin:GetName();
-    self.opacity = 0.5;
+    self.opacity = 0.6;
 
     Settings.Window = {
         Opacity = self.opacity,
