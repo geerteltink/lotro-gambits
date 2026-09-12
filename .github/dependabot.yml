@@ -9,7 +9,7 @@ updates:
       timezone: "Europe/Amsterdam"
     open-pull-requests-limit: 3
     cooldown:
-      default-days: 3
+      default-days: 21
     rebase-strategy: disabled
     labels:
       - "ci"
@@ -29,7 +29,7 @@ updates:
     versioning-strategy: increase
     open-pull-requests-limit: 1
     cooldown:
-      default-days: 3
+      default-days: 21
     rebase-strategy: disabled
     labels:
       - "build"
@@ -49,7 +49,7 @@ updates:
     versioning-strategy: increase
     open-pull-requests-limit: 1
     cooldown:
-      default-days: 3
+      default-days: 21
     rebase-strategy: disabled
     labels:
       - "build"
